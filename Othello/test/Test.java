@@ -2,7 +2,7 @@ package test;
 public class Test{
 
 	public Test(){
-		System.out.println("あああ");
+		System.out.println("ああiiiあ");
 	}
 
 }
