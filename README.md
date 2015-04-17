@@ -1,0 +1,2 @@
+# Project_Exercis_Othello
+プロジェクト演習用のリポジトリ
