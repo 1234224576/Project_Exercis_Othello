@@ -1,7 +1,5 @@
 public class Negamax extends AI {
 
-
-
 	@Override
 	public Point move(int[][] board){
 		//打てる手を全て生成
