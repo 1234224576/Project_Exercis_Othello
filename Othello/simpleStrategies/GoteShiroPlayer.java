@@ -52,6 +52,10 @@ currentState.isLegalメソッドでチェック
 		m.x = yoko;
 		m.y = tate;
 
+		/*以下独自実装部*/
+		
+		Negamax n = new Negamax();
+
 		return m;
 
 	}

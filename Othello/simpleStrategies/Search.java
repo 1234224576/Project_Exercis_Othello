@@ -1,13 +1,17 @@
-
+package simpleStrategies;
 public class Search {
 
 	static final int SIZE = 8;
+	public enum Phasing{
+		BLACK,
+		WHITE;
+	}
 
 	public Search(){
 
 	}
 
-	public int[][] checkNextBoard(int[][] board,Point p){
+	public int[][] checkNextBoard(int[][] board,Point p,Phasing ph){
 
 		int yoko = p.x;
 		int tate = p.y;
@@ -278,7 +282,7 @@ public class Search {
 	private void plotBoard(int[][] board,Point p){
 		int tate = p.x;
 		int yoko = p.y;
-		
+
 		for(int j=0; j<SIZE; j++){
             for(int i=0; i<SIZE; i++){
                 if(i == yoko && j == tate) {
