@@ -74,11 +74,11 @@ currentState.isLegalメソッドでチェック
             int search = check_state[yoko][tate-1]; // 隣のマスの情報を代入
             int turn = 0;
             int turn_tate = 0;
-            if(search == back_color && (tate-1) != 0) { // 隣のマスに対戦相手の石があるなら探索開始
-                                               // ただし、それが端のマスでない場合
+            if(search == 2 && (tate-1) != 0) { // 隣のマスに対戦相手の石があるなら探索開始
+                // ただし、それが端のマスでない場合
                 for(int i=0; i<=tate-2; i++) {
                     search = check_state[yoko][tate-2-i]; // さらに隣のマスの情報を代入
-                    if(search == front_color) {
+                    if(search == 1) {
                         turn_tate = tate-1-i; // 1つ前のマスの位置を代入
                         turn = 1; // ひっくり返せる
                         break;
