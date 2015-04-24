@@ -25,12 +25,12 @@ public class GoteShiroPlayer extends Strategy {
 // check_state配列の表示用
 // 無0　黒1　白2
 
-		for(int j=0; j<SIZE; j++){
-			for(int i=0; i<SIZE; i++){
-				System.out.print(check_state[i][j] + " ");
-			}
-			System.out.println();
-		}
+		// for(int j=0; j<SIZE; j++){
+		// 	for(int i=0; i<SIZE; i++){
+		// 		System.out.print(check_state[i][j] + " ");
+		// 	}
+		// 	System.out.println();
+		// }
 
 
 		Move m = new Move();
@@ -44,7 +44,6 @@ currentState.isLegalメソッドでチェック
 置けないなら，置けるところが見つかるまで繰り返す
 */
 		do {
-			Test a = new Test();
 			yoko = (int)(Math.random()*SIZE);
 			tate = (int)(Math.random()*SIZE);
 		} while (!currentState.isLegal(thisPlayer,yoko,tate));
@@ -52,9 +51,6 @@ currentState.isLegalメソッドでチェック
 		m.x = yoko;
 		m.y = tate;
 
-		/*以下独自実装部*/
-		
-		Negamax n = new Negamax();
 
 		return m;
 
