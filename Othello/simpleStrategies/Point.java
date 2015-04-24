@@ -1,3 +1,4 @@
+package simpleStrategies;
 public class Point {
 	
 	public int x;
