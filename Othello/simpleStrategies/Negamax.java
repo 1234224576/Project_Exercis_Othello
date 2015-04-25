@@ -10,6 +10,7 @@ public class Negamax extends AI {
 	public Point move(int[][] board,Search.Phasing ph,int limit,int alpha,int beta){
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
+		// search.plotMovableBoard(movables);
 
 		Point resultPos = new Point();
 		int eval,eval_max = Integer.MIN_VALUE;
@@ -19,9 +20,13 @@ public class Negamax extends AI {
 				if(movables[i][j] == 1){
 					//仮想盤上に手を打つ
 					Point p = new Point();
-					p.x = j;
-					p.y = i;
-					int[][] nextBoard = search.checkNextBoard(board,p,ph);
+					p.x = i;
+					p.y = j;
+					int[][] nextBoard = search.checkNextBoard(board,p,ph).clone();
+
+
+					// search.plotBoard(board,p);
+
 					//次の手番
 					Search.Phasing nextPh;
 					if(ph == Search.Phasing.BLACK){
@@ -29,26 +34,25 @@ public class Negamax extends AI {
 					}else{
 						nextPh = Search.Phasing.BLACK;
 					}
-					eval =  -negamax(board,limit-1,-beta,-alpha,nextPh);
+					eval =  negamax(nextBoard,limit-1,-beta,-alpha,nextPh);
 
 					if(eval > eval_max){
 						//打つ手を決定
-						System.out.println("x:" + j + "y:" + i);
-						resultPos.x = j;
-						resultPos.y = i;
+						resultPos.x = i;
+						resultPos.y = j;
 						eval_max = eval;
 					}
 
 				}
 			}
 		}
+		// search.plotBoard(board,resultPos);
 		System.out.println("MAX:"+eval_max);
 		return resultPos;
 	}
 
 	private int negamax(int[][] board,int limit,int alpha,int beta,Search.Phasing ph){
 		if(limit == 0){
-			System.out.println("SCORE:" + evalute(board));
 			return evalute(board);
 		}
 
@@ -62,9 +66,10 @@ public class Negamax extends AI {
 			for(int i=0;i < Search.SIZE;i++){
 				if(movables[i][j] == 1){
 					Point p = new Point();
-					p.x = j;
-					p.y = i;
-					int[][] nextBoard = search.checkNextBoard(board,p,ph);
+					p.x = i;
+					p.y = j;
+					int[][] nextBoard = search.checkNextBoard(board,p,ph).clone();
+					nextBoard = search.checkNextBoard(board,p,ph).clone();
 
 					Search.Phasing nextPh;
 					if(ph == Search.Phasing.BLACK){
@@ -82,6 +87,7 @@ public class Negamax extends AI {
 					if(score > scoreMax){
 						//よりよい手がみつかった
 						scoreMax = score;
+						System.out.println("SCORE:" + score);
 						alpha = Math.max(alpha,scoreMax);
 					}
 				}

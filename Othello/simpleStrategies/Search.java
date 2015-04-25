@@ -12,7 +12,13 @@ public class Search {
 
 	}
 
-	public int[][] checkNextBoard(int[][] board,Point p,Phasing ph){
+	public int[][] checkNextBoard(int[][] originalBoard,Point p,Phasing ph){
+        int[][] board = new int[SIZE][SIZE];
+        for(int j=0;j<SIZE;j++){
+            for(int i=0;i<SIZE;i++){
+                board[i][j] = originalBoard[i][j];
+            }
+        }
 
 		int yoko = p.x;
 		int tate = p.y;
@@ -290,8 +296,15 @@ public class Search {
         return board;
 	}
 
-    public int[][] obtainMovablePosition(int[][] board,Phasing ph){
+    public int[][] obtainMovablePosition(int[][] originalBoard,Phasing ph){
         
+        int[][] board = new int[SIZE][SIZE];
+        for(int j=0;j<SIZE;j++){
+            for(int i=0;i<SIZE;i++){
+                board[i][j] = originalBoard[i][j];
+            }
+        }
+
         int[] put_yoko = new int[SIZE*SIZE];
         int[] put_tate = new int[SIZE*SIZE];
         int put_list = 0; // リストの数
@@ -576,7 +589,7 @@ public class Search {
 
 
     //現在の盤面
-	private void plotBoard(int[][] board,Point p){
+	public void plotBoard(int[][] board,Point p){
 		int yoko = p.x;
 		int tate = p.y;
         for(int j=0; j<SIZE; j++){
@@ -593,7 +606,7 @@ public class Search {
         }
 	}
 
-    private void plotMovableBoard(int[][] board){
+    public void plotMovableBoard(int[][] board){
         for(int j=0; j<SIZE; j++){
             for(int i=0; i<SIZE; i++){
                 if(board[i][j] == 1) {

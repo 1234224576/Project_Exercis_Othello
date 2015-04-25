@@ -32,27 +32,34 @@ public class GoteShiroPlayer extends Strategy {
 		// 	System.out.println();
 		// }
 
-
 		Move m = new Move();
-		int yoko, tate;
-
-/*
-8*8マスの中からランダムに1箇所選んで，
-その箇所に石を置けるかどうかを
-currentState.isLegalメソッドでチェック
-置けるならそこに置く
-置けないなら，置けるところが見つかるまで繰り返す
-*/
-		do {
-			yoko = (int)(Math.random()*SIZE);
-			tate = (int)(Math.random()*SIZE);
-		} while (!currentState.isLegal(thisPlayer,yoko,tate));
-
-		m.x = yoko;
-		m.y = tate;
-
+        Negamax n = new Negamax();
+        Point p = n.move(check_state,Search.Phasing.WHITE,1,Integer.MAX_VALUE,Integer.MIN_VALUE);
+        
+        m.x = p.x;
+        m.y = p.y;
 
 		return m;
+// 		Move m = new Move();
+// 		int yoko, tate;
+
+// /*
+// 8*8マスの中からランダムに1箇所選んで，
+// その箇所に石を置けるかどうかを
+// currentState.isLegalメソッドでチェック
+// 置けるならそこに置く
+// 置けないなら，置けるところが見つかるまで繰り返す
+// */
+// 		do {
+// 			yoko = (int)(Math.random()*SIZE);
+// 			tate = (int)(Math.random()*SIZE);
+// 		} while (!currentState.isLegal(thisPlayer,yoko,tate));
+
+// 		m.x = yoko;
+// 		m.y = tate;
+
+
+// 		return m;
 
 	}
 
