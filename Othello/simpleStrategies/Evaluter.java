@@ -1,5 +1,6 @@
 package simpleStrategies;
 public abstract class Evaluter {
-	abstract public int evalute();
+	public int[][] openLevel = new int[Search.SIZE][Search.SIZE]; //開放度を格納する
 
+	abstract public int evalute(int[][] originalBoard,int myNum,int eneNum);
 }

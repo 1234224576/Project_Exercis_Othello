@@ -5,7 +5,12 @@ public class NormalEvaluter extends Evaluter {
 	private int myNum;
 	private int eneNum;
 
-	public NormalEvaluter(int[][] originalBoard,int myNum,int eneNum){
+	public NormalEvaluter(){
+		
+	}
+
+	public int evalute(int[][] originalBoard,int myNum,int eneNum){
+		//情報をセット
 		for(int j=0;j<Search.SIZE;j++){
             for(int i=0;i<Search.SIZE;i++){
                 board[i][j] = originalBoard[i][j];
@@ -14,9 +19,8 @@ public class NormalEvaluter extends Evaluter {
 
         this.myNum = myNum;
         this.eneNum = eneNum;
-	}
 
-	public int evalute(){
+
 		int eval = 0;
 
 		for(int j=0;j<board.length;j++){

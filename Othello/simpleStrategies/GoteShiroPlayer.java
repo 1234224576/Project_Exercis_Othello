@@ -10,6 +10,7 @@ import test.*;
 public class GoteShiroPlayer extends Strategy {
 
 	private int[][] check_state = new int[SIZE][SIZE];
+	private Evaluter evaluter = new NormalEvaluter();
 
 // コンストラクタは改造せずこのまま使うこと
 	public GoteShiroPlayer(Player _thisPlayer, int size) {
@@ -34,7 +35,7 @@ public class GoteShiroPlayer extends Strategy {
 
 		Move m = new Move();
 
-        Negamax n = new Negamax(Search.Phasing.WHITE);
+        Negamax n = new Negamax(Search.Phasing.WHITE,evaluter);
         System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
         Point p = n.move(check_state,Search.Phasing.WHITE);
         System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");

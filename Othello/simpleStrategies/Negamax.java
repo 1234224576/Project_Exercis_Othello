@@ -1,20 +1,19 @@
 package simpleStrategies;
 public class Negamax extends AI {
-
-
+	private Evaluter evaluter;
 	private Search search;
 	private Search.Phasing myColor;
-	public Negamax(Search.Phasing mc){
+	public Negamax(Search.Phasing mc,Evaluter evaluter){
+		this.evaluter = evaluter;
 		myColor = mc;
 		search = new Search();
 	}
 	@Override
 	public Point move(int[][] board,Search.Phasing ph){
 
-		int limit = 9;
+		int limit = 5;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
-		// search.plotMovableBoard(movables);
 
 		//打てる所が１箇所ならそこに打つ
 		int movableCount = 0;
@@ -24,6 +23,7 @@ public class Negamax extends AI {
 			}
 		}
 		if(movableCount == 1){
+			search.plotMovableBoard(movables);
 			for(int j=0; j<Search.SIZE;j++){
 				for(int i=0;i < Search.SIZE;i++){
 					if(movables[i][j] == 1){
@@ -37,7 +37,7 @@ public class Negamax extends AI {
 		}
 
 		Point resultPos = new Point();
-		int eval,eval_max = Integer.MIN_VALUE;
+		int eval,eval_max = -Integer.MAX_VALUE;
 
 		for(int j=0; j<Search.SIZE;j++){
 			for(int i=0;i < Search.SIZE;i++){
@@ -55,7 +55,7 @@ public class Negamax extends AI {
 					}else{
 						nextPh = Search.Phasing.BLACK;
 					}
-					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,-Integer.MIN_VALUE,nextPh);
+					eval =  -negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh);
 
 					if(eval > eval_max){
 						//打つ手を決定
@@ -67,7 +67,6 @@ public class Negamax extends AI {
 				}
 			}
 		}
-		// search.plotBoard(board,resultPos);
 		System.out.println("最終結果:"+eval_max);
 		return resultPos;
 	}
@@ -83,13 +82,21 @@ public class Negamax extends AI {
 		int[][] movables = search.obtainMovablePosition(board,ph);
 		int eval;
 
-		boolean isMovale = false;
+
+		//パス、打てる場所一個かどうか判定
+		int movableCount = 0;
 		for(int j=0; j<Search.SIZE;j++){
 			for(int i=0;i < Search.SIZE;i++){
-				if(movables[i][j] == 1) isMovale = true;
+				
+				if(movables[i][j] == 1) movableCount++;
 			}
 		}
-		if(!isMovale){
+		//打てる場所が一箇所ならすぐ返す
+		if(movableCount == 1){
+			return 0;
+		}
+		//打てないならパス
+		if(movableCount == 0){
 			Search.Phasing nextPh;
 			if(ph == Search.Phasing.BLACK){
 				nextPh = Search.Phasing.WHITE;
@@ -100,7 +107,7 @@ public class Negamax extends AI {
 			return eval;
 		}
 
-
+		//打てる手全てに対して探索
 		for(int j=0; j<Search.SIZE;j++){
 			for(int i=0;i < Search.SIZE;i++){
 				if(movables[i][j] == 1){
@@ -108,9 +115,6 @@ public class Negamax extends AI {
 					p.x = i;
 					p.y = j;
 					int[][] nextBoard = search.checkNextBoard(board,p,ph);
-					// System.out.println("============");
-					// search.plotBoard(board,p);
-
 					Search.Phasing nextPh;
 					if(ph == Search.Phasing.BLACK){
 						nextPh = Search.Phasing.WHITE;
@@ -119,11 +123,13 @@ public class Negamax extends AI {
 					}
 
 					eval = -negamax(nextBoard,limit-1,-beta,-alpha,nextPh);
-					System.out.println("SCORE"+eval);
+					System.out.println("SCORE:"+eval);
 
 					alpha = Math.max(alpha,eval);
+
 					if(alpha >= beta){
 						//ベータ値を上回ったら探索を中止
+						System.out.println("芝刈り：a="+alpha+",b="+beta);
 						return alpha;
 					}
 				}
@@ -134,7 +140,7 @@ public class Negamax extends AI {
 		return alpha;
 	}
 
-	// /*評価関数・現在は仮実装。最終的に複数クラスに分離する*/
+	//評価する
 	private int evalute(int[][] board){
 		int myNum;
 		int eneNum;
@@ -145,8 +151,6 @@ public class Negamax extends AI {
 			myNum = 2;
 			eneNum = 1;
 		}
-
-		NormalEvaluter evauter = new NormalEvaluter(board,myNum,eneNum);
-		return evauter.evalute();
+		return evaluter.evalute(board,myNum,eneNum);
 	}
 }

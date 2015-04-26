@@ -7,7 +7,7 @@ import game.Player;
 import game.Strategy;
 
 public class SenteKuroPlayer extends Strategy {
-
+    private Evaluter evaluter = new NormalEvaluter();
 	private int[][] check_state = new int[SIZE][SIZE];
 
 // コンストラクタは改造せずこのまま使うこと
@@ -27,7 +27,7 @@ public class SenteKuroPlayer extends Strategy {
 
 
 		Move m = new Move();
-        Negamax n = new Negamax(Search.Phasing.BLACK);
+        Negamax n = new Negamax(Search.Phasing.BLACK,evaluter);
         System.out.println("＝＝＝＝＝＝＝＝BLACK＝＝＝＝＝＝＝＝");
         Point p = n.move(check_state,Search.Phasing.BLACK);
         System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
