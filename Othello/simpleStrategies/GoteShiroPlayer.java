@@ -33,15 +33,13 @@ public class GoteShiroPlayer extends Strategy {
 		// }
 
 		Move m = new Move();
-        Negamax n = new Negamax();
+
+        Negamax n = new Negamax(Search.Phasing.WHITE);
+        System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
         Point p = n.move(check_state,Search.Phasing.WHITE);
-        
+        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
         m.x = p.x;
         m.y = p.y;
-
-		return m;
-// 		Move m = new Move();
-// 		int yoko, tate;
 
 // /*
 // 8*8マスの中からランダムに1箇所選んで，
@@ -50,16 +48,17 @@ public class GoteShiroPlayer extends Strategy {
 // 置けるならそこに置く
 // 置けないなら，置けるところが見つかるまで繰り返す
 // */
-// 		do {
-// 			yoko = (int)(Math.random()*SIZE);
-// 			tate = (int)(Math.random()*SIZE);
-// 		} while (!currentState.isLegal(thisPlayer,yoko,tate));
+  //       int yoko, tate;
+		// do {
+		// 	yoko = (int)(Math.random()*SIZE);
+		// 	tate = (int)(Math.random()*SIZE);
+		// } while (!currentState.isLegal(thisPlayer,yoko,tate));
 
-// 		m.x = yoko;
-// 		m.y = tate;
+		// m.x = yoko;
+		// m.y = tate;
 
 
-// 		return m;
+		return m;
 
 	}
 

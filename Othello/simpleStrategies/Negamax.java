@@ -3,13 +3,15 @@ public class Negamax extends AI {
 
 
 	private Search search;
-	public Negamax(){
+	private Search.Phasing myColor;
+	public Negamax(Search.Phasing mc){
+		myColor = mc;
 		search = new Search();
 	}
 	@Override
 	public Point move(int[][] board,Search.Phasing ph){
 
-		int limit = 15;
+		int limit = 9;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 		// search.plotMovableBoard(movables);
@@ -45,9 +47,6 @@ public class Negamax extends AI {
 					p.x = i;
 					p.y = j;
 					int[][] nextBoard = search.checkNextBoard(board,p,ph);
-
-
-					// search.plotBoard(board,p);
 
 					//次の手番
 					Search.Phasing nextPh;
@@ -137,13 +136,17 @@ public class Negamax extends AI {
 
 	// /*評価関数・現在は仮実装。最終的に複数クラスに分離する*/
 	private int evalute(int[][] board){
-
-		int count = 0;
-		for(int j=0;j<board.length;j++){
-			for(int i=0;i<board.length;i++){
-				if(board[i][j] == 1) count ++;
-			}
+		int myNum;
+		int eneNum;
+		if(this.myColor == Search.Phasing.BLACK){
+			myNum = 1;
+			eneNum = 2;
+		}else{
+			myNum = 2;
+			eneNum = 1;
 		}
-		return count;
+
+		NormalEvaluter evauter = new NormalEvaluter(board,myNum,eneNum);
+		return evauter.evalute();
 	}
 }
