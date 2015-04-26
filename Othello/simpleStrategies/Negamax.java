@@ -11,7 +11,7 @@ public class Negamax extends AI {
 	@Override
 	public Point move(int[][] board,Search.Phasing ph){
 
-		int limit = 5;
+		int limit = 9;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 
