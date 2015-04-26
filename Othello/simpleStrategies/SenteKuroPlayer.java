@@ -28,8 +28,9 @@ public class SenteKuroPlayer extends Strategy {
 
 		Move m = new Move();
         Negamax n = new Negamax();
-        Point p = n.move(check_state,Search.Phasing.BLACK,15,Integer.MAX_VALUE,Integer.MIN_VALUE);
-        
+        System.out.println("＝＝＝＝＝＝＝＝BLACK===============");
+        Point p = n.move(check_state,Search.Phasing.BLACK);
+        System.out.println("＝＝＝＝＝＝＝＝===============");
         m.x = p.x;
         m.y = p.y;
 

@@ -34,7 +34,7 @@ public class GoteShiroPlayer extends Strategy {
 
 		Move m = new Move();
         Negamax n = new Negamax();
-        Point p = n.move(check_state,Search.Phasing.WHITE,1,Integer.MAX_VALUE,Integer.MIN_VALUE);
+        Point p = n.move(check_state,Search.Phasing.WHITE);
         
         m.x = p.x;
         m.y = p.y;

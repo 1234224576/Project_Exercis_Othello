@@ -1,6 +1,6 @@
 package simpleStrategies;
 public abstract class AI {
-	abstract public Point move(int[][] board,Search.Phasing ph,int limit,int alpha,int beta);
+	abstract public Point move(int[][] board,Search.Phasing ph);
 	
 	public int presearch_depth = 3;
 	public int normal_depth = 15;

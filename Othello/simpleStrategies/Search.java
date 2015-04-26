@@ -587,6 +587,21 @@ public class Search {
         return movablePointArray;
     }
 
+    public boolean getIsGameOver(int[][] board){
+        int blackCount = 0;
+        int whiteCount = 0;
+        int spaceCount = 64;
+
+        for(int j=0; j<SIZE; j++){
+            for(int i=0; i<SIZE; i++){
+                if(board[i][j] == 0) spaceCount--;
+                if(board[i][j] == 1) blackCount++;
+                if(board[i][j] == 2) whiteCount++;
+            }
+        }
+        if(blackCount==0 || whiteCount==0 || spaceCount==0) return true;
+        return false;
+    }
 
     //現在の盤面
 	public void plotBoard(int[][] board,Point p){
