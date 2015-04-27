@@ -34,6 +34,8 @@ public class Search {
             back_color = 1;
         }
 
+        board[p.x][p.y] = front_color;
+
         /* 上方向の探索 */
         if(tate != 0) { // そのポイントが端でない場合
             int search = board[yoko][tate-1]; // 隣のマスの情報を代入
@@ -293,6 +295,20 @@ public class Search {
                 }
             }
         }
+
+         for(int j=0; j<SIZE; j++){
+          for(int i=0; i<SIZE; i++){
+            
+                if(board[i][j] == 0) System.out.print("  ");
+                else if(board[i][j] == 1) System.out.print("● ");
+                else if(board[i][j] == 2) System.out.print("○ ");
+            
+            }
+            System.out.println();
+        }
+            System.out.println();
+
+
         return board;
 	}
 

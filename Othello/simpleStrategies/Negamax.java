@@ -11,7 +11,7 @@ public class Negamax extends AI {
 	@Override
 	public Point move(int[][] board,Search.Phasing ph){
 
-		int limit = 9;
+		int limit = 3;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 
@@ -71,9 +71,17 @@ public class Negamax extends AI {
 		return resultPos;
 	}
 
-	private int negamax(int[][] board,int limit,int alpha,int beta,Search.Phasing ph){
+	private int negamax(int[][] originlboard,int limit,int alpha,int beta,Search.Phasing ph){
+		int[][] board = new int[8][8];
+
+		for(int j=0;j<8;j++){
+            for(int i=0;i<8;i++){
+                board[i][j] = originlboard[i][j];
+            }
+        }
 
 		if(limit == 0 || search.getIsGameOver(board)){
+
 			System.out.println("FIRST_SCORE:" + evalute(board));
 			return evalute(board);
 		}
@@ -107,6 +115,7 @@ public class Negamax extends AI {
 			return eval;
 		}
 
+		System.out.println("limit:"+limit);
 		//打てる手全てに対して探索
 		for(int j=0; j<Search.SIZE;j++){
 			for(int i=0;i < Search.SIZE;i++){
@@ -122,6 +131,7 @@ public class Negamax extends AI {
 						nextPh = Search.Phasing.BLACK;
 					}
 
+					// search.plotBoard(nextBoard,p);
 					eval = -negamax(nextBoard,limit-1,-beta,-alpha,nextPh);
 					System.out.println("SCORE:"+eval);
 
