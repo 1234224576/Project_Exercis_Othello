@@ -11,7 +11,7 @@ public class Negamax extends AI {
 	@Override
 	public Point move(int[][] board,Search.Phasing ph){
 
-		int limit = 3;
+		int limit = 5;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 
@@ -23,7 +23,7 @@ public class Negamax extends AI {
 			}
 		}
 		if(movableCount == 1){
-			search.plotMovableBoard(movables);
+			// search.plotMovableBoard(movables);
 			for(int j=0; j<Search.SIZE;j++){
 				for(int i=0;i < Search.SIZE;i++){
 					if(movables[i][j] == 1){
@@ -55,7 +55,7 @@ public class Negamax extends AI {
 					}else{
 						nextPh = Search.Phasing.BLACK;
 					}
-					eval =  -negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh);
+					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh);
 
 					if(eval > eval_max){
 						//打つ手を決定
@@ -90,19 +90,18 @@ public class Negamax extends AI {
 		int[][] movables = search.obtainMovablePosition(board,ph);
 		int eval;
 
-
 		//パス、打てる場所一個かどうか判定
 		int movableCount = 0;
 		for(int j=0; j<Search.SIZE;j++){
 			for(int i=0;i < Search.SIZE;i++){
-				
 				if(movables[i][j] == 1) movableCount++;
 			}
 		}
 		//打てる場所が一箇所ならすぐ返す
-		if(movableCount == 1){
-			return 0;
-		}
+		// if(movableCount == 1){
+
+		// 	return 0;
+		// }
 		//打てないならパス
 		if(movableCount == 0){
 			Search.Phasing nextPh;
@@ -111,11 +110,9 @@ public class Negamax extends AI {
 			}else{
 				nextPh = Search.Phasing.BLACK;
 			}
-			eval = -negamax(board,limit,-beta,-alpha,nextPh);
+			eval = -negamax(board,limit-1,-beta,-alpha,nextPh);
 			return eval;
 		}
-
-		System.out.println("limit:"+limit);
 		//打てる手全てに対して探索
 		for(int j=0; j<Search.SIZE;j++){
 			for(int i=0;i < Search.SIZE;i++){

@@ -295,20 +295,6 @@ public class Search {
                 }
             }
         }
-
-         for(int j=0; j<SIZE; j++){
-          for(int i=0; i<SIZE; i++){
-            
-                if(board[i][j] == 0) System.out.print("  ");
-                else if(board[i][j] == 1) System.out.print("● ");
-                else if(board[i][j] == 2) System.out.print("○ ");
-            
-            }
-            System.out.println();
-        }
-            System.out.println();
-
-
         return board;
 	}
 
