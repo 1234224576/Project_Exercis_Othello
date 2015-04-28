@@ -30,4 +30,12 @@ public class NormalEvaluter extends Evaluter {
 		}
 		return eval;
 	}
+
+	private obtainMountainEvaluation(){
+		int eval = 0;
+
+		//ここに実装を書く
+
+		return eval;
+	}
 }
