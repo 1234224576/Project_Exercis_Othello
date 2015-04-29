@@ -31,7 +31,21 @@ public class NormalEvaluter extends Evaluter {
 		return eval;
 	}
 
-	private obtainMountainEvaluation(){
+	private int obtainOpenLevelEvalution(){
+		int eval = 0;
+
+
+		return eval;
+	}
+
+	private int obtainMovableCountEvalution(){
+		int eval = 0;
+
+		return eval;
+	}
+
+
+	private int obtainMountainEvaluation(){
 		int eval = 0;
 
 		//ここに実装を書く
