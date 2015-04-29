@@ -11,7 +11,7 @@ public class Negamax extends AI {
 	@Override
 	public Point move(int[][] board,Search.Phasing ph,int currentTurn){
 
-		int limit = 9;
+		int limit = 7;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 
@@ -61,7 +61,7 @@ public class Negamax extends AI {
 					evaluter.calcOpenLevel(board,i,j); //打つ予定の場所の開放度を計算する
 
 					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh,evaluter);
-
+					eval = Math.abs(eval);
 					System.out.println("最後の選択:"+eval);
 					if(eval > eval_max){
 						//打つ手を決定
