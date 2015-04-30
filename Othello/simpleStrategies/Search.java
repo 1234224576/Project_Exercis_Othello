@@ -3,6 +3,7 @@ public class Search {
 
 	static final int SIZE = 8;
 
+    private int latestMovableCount = 0; //最新のおける箇所の数
 	public enum Phasing{
 		BLACK,
 		WHITE,
@@ -299,7 +300,8 @@ public class Search {
 	}
 
     public int[][] obtainMovablePosition(int[][] originalBoard,Phasing ph){
-        
+        this.latestMovableCount = 0;
+
         int[][] board = new int[SIZE][SIZE];
         for(int j=0;j<SIZE;j++){
             for(int i=0;i<SIZE;i++){
@@ -580,6 +582,7 @@ public class Search {
             for(int i=0; i<SIZE; i++){
                 if(put_yoko[put_list] == i && put_tate[put_list] == j && list_end >= 0) {
                     movablePointArray[i][j] = 1;
+                    this.latestMovableCount++;
                     if(list_end != put_list) put_list++;
                 } else {
                     movablePointArray[i][j] = 0;
@@ -634,6 +637,10 @@ public class Search {
             }
             System.out.println();
         }
+    }
+
+    public int getLatestMovableCount(){
+        return this.latestMovableCount;
     }
 
     // public static void main(String[] args){

@@ -9,7 +9,7 @@ public class NormalEvaluter extends Evaluter {
 		
 	}
 
-	public int evalute(int[][] originalBoard,int myNum,int eneNum){
+	public int evalute(int[][] originalBoard,int myNum,int eneNum,int movableCount){
 
 		this.myNum = myNum;
         this.eneNum = eneNum;
@@ -30,7 +30,7 @@ public class NormalEvaluter extends Evaluter {
 		}
 
 		eval += obtainOpenLevelEvalution();
-
+		eval += obtainMovableCountEvalution(movableCount);
 		return eval;
 	}
 	private int obtainOpenLevelEvalution(){
@@ -39,9 +39,9 @@ public class NormalEvaluter extends Evaluter {
 		return eval;
 	}
 
-	private int obtainMovableCountEvalution(){
+	private int obtainMovableCountEvalution(int movableCount){
 		int eval = 0;
-
+		eval =  movableCount * 20;
 		return eval;
 	}
 
