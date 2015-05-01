@@ -11,7 +11,7 @@ public class Negamax extends AI {
 	@Override
 	public Point move(int[][] board,Search.Phasing ph,int currentTurn){
 
-		int limit = 7;
+		int limit = 5;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 
@@ -60,6 +60,7 @@ public class Negamax extends AI {
 					NormalEvaluter evaluter = new NormalEvaluter();
 					evaluter.calcOpenLevel(board,i,j); //打つ予定の場所の開放度を計算する
 
+
 					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh,evaluter);
 					eval = Math.abs(eval);
 					System.out.println("最後の選択:"+eval);
@@ -88,12 +89,13 @@ public class Negamax extends AI {
 
 		if(limit == 0 || search.getIsGameOver(board)){
 			System.out.println("評価値:" + evalute(board,evaluter));
+			System.out.println("手番:" + ph);
 			return evalute(board,evaluter);
 		}
 
 		//可能な手を全て生成;
 		int[][] movables = search.obtainMovablePosition(board,ph);
-		int eval;
+		int eval; // 評価値
 
 		//パス、打てる場所一個かどうか判定
 		int movableCount = 0;
@@ -154,6 +156,12 @@ public class Negamax extends AI {
 
 	//評価する
 	private int evalute(int[][] board,Evaluter evaluter){
+
+		/*@TODO
+		ここが黒の情報になっているか確かめる必要がある*/
+		// search.plotMovableBoard(movables);
+		System.out.println("MOVABLECOUNT:" + search.getLatestMovableCount());
+
 		int myNum;
 		int eneNum;
 		if(this.myColor == Search.Phasing.BLACK){
@@ -163,6 +171,7 @@ public class Negamax extends AI {
 			myNum = 2;
 			eneNum = 1;
 		}
-		return evaluter.evalute(board,myNum,eneNum);
+
+		return evaluter.evalute(board,myNum,eneNum,search.getLatestMovableCount());
 	}
 }
