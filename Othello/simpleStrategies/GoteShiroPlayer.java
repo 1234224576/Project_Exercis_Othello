@@ -11,7 +11,7 @@ public class GoteShiroPlayer extends Strategy {
 
 	private int[][] check_state = new int[SIZE][SIZE];
 	private Evaluter evaluter = new NormalEvaluter();
-
+	private int currentTurn = 1;
 // コンストラクタは改造せずこのまま使うこと
 	public GoteShiroPlayer(Player _thisPlayer, int size) {
 		super(_thisPlayer, size);
@@ -25,23 +25,6 @@ public class GoteShiroPlayer extends Strategy {
 
 // check_state配列の表示用
 // 無0　黒1　白2
-
-		// for(int j=0; j<SIZE; j++){
-		// 	for(int i=0; i<SIZE; i++){
-		// 		System.out.print(check_state[i][j] + " ");
-		// 	}
-		// 	System.out.println();
-		// }
-
-		Move m = new Move();
-
-        // Negamax n = new Negamax(Search.Phasing.WHITE,evaluter);
-        // System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
-        // Point p = n.move(check_state,Search.Phasing.WHITE);
-        // System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-        // m.x = p.x;
-        // m.y = p.y;
-
 // /*
 // 8*8マスの中からランダムに1箇所選んで，
 // その箇所に石を置けるかどうかを
@@ -49,18 +32,24 @@ public class GoteShiroPlayer extends Strategy {
 // 置けるならそこに置く
 // 置けないなら，置けるところが見つかるまで繰り返す
 // */
-        int yoko, tate;
-		do {
-			yoko = (int)(Math.random()*SIZE);
-			tate = (int)(Math.random()*SIZE);
-		} while (!currentState.isLegal(thisPlayer,yoko,tate));
+  //       int yoko, tate;
+		// do {
+		// 	yoko = (int)(Math.random()*SIZE);
+		// 	tate = (int)(Math.random()*SIZE);
+		// } while (!currentState.isLegal(thisPlayer,yoko,tate));
 
-		m.x = yoko;
-		m.y = tate;
+		// m.x = yoko;
+		// m.y = tate;
 
-
+		Move m = new Move();
+        Negamax n = new Negamax(Search.Phasing.WHITE);
+        System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
+        Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
+        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+        m.x = p.x;
+        m.y = p.y;
+        currentTurn+=2;
 		return m;
-
 	}
 
 	private void check(GameState currentState) {

@@ -25,7 +25,7 @@ public class SenteKuroPlayer extends Strategy {
 
 
 
-		Move m = new Move();
+		 Move m = new Move();
         Negamax n = new Negamax(Search.Phasing.BLACK);
         System.out.println("＝＝＝＝＝＝＝＝BLACK＝＝＝＝＝＝＝＝");
         Point p = n.move(check_state,Search.Phasing.BLACK,this.currentTurn);
@@ -34,6 +34,15 @@ public class SenteKuroPlayer extends Strategy {
         m.y = p.y;
         currentTurn+=2;
 		return m;
+		//   int yoko, tate;
+		// do {
+		// 	yoko = (int)(Math.random()*SIZE);
+		// 	tate = (int)(Math.random()*SIZE);
+		// } while (!currentState.isLegal(thisPlayer,yoko,tate));
+
+		// m.x = yoko;
+		// m.y = tate;
+		// return m;
 	}
 
 	private void check(GameState currentState) {
