@@ -30,6 +30,7 @@ public class NormalEvaluter extends Evaluter {
 		}
 
 		eval += obtainOpenLevelEvalution();
+        eval += obtainDecidedStoneEvalution();
 
 		return eval;
 	}
@@ -45,6 +46,76 @@ public class NormalEvaluter extends Evaluter {
 		return eval;
 	}
 
+    private int obtainDecidedStoneEvalution(){ // 確定石
+        int eval = 0;
+        
+        if(board[0][0] == myNum){
+            for(int i=1;i<Search.SIZE;i++){
+                if(board[i][0] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+            for(int i=1;i<Search.SIZE;i++){
+                if(board[0][i] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+        }
+        if(board[Search.SIZE-1][0] == myNum){
+            for(int i=Search.SIZE-1;i>=0;i--){
+                if(board[i][0] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+            for(int i=1;i<Search.SIZE;i++){
+                if(board[Search.SIZE][i] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+        }
+        if(board[0][Search.SIZE-1] == myNum){
+            for(int i=1;i<Search.SIZE;i++){
+                if([i][Search.SIZE] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+            for(int i=Search.SIZE-1;i>=0;i--){
+                if(board[i][0] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+        }
+        if(board[Search.SIZE-1][Search.SIZE-1] == myNum){
+            for(int i=Search.SIZE-1;i>=0;i--){
+                if([i][Search.SIZE] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+            for(int i=Search.SIZE-1;i>=0;i--){
+                if(board[i][Search.SIZE] == myNum) {
+                    eval++;
+                } else {
+                    break;
+                }
+            }
+        }
+        
+        return eval;
+    }
 
 	private int obtainMountainEvaluation(){
 		int eval = 0;
