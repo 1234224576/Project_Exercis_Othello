@@ -47,14 +47,13 @@ public class NormalEvaluter extends Evaluter {
 
 	private int obtainOpenLevelEvalution(){
 		int eval = 0;
-        if(myNum == 1) eval = openLevel * 1999;
-        else eval = openLevel*2;
+		eval = openLevel * 10;
 		return eval;
 	}
 
 	private int obtainMovableCountEvalution(int movableCount){
 		int eval = 0;
-		eval =  movableCount * 30;
+		eval =  movableCount * 20;
 		return eval;
 	}
 

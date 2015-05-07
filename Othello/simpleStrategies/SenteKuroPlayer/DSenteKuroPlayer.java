@@ -5,15 +5,12 @@ import game.Move;
 import game.OthelloMoveException;
 import game.Player;
 import game.Strategy;
-import test.*;
 
-public class GoteShiroPlayer extends Strategy {
-
+public class SenteKuroPlayer extends Strategy {
 	private int[][] check_state = new int[SIZE][SIZE];
-	private Evaluter evaluter = new NormalEvaluter();
 	private int currentTurn = 1;
 // コンストラクタは改造せずこのまま使うこと
-	public GoteShiroPlayer(Player _thisPlayer, int size) {
+	public SenteKuroPlayer(Player _thisPlayer, int size) {
 		super(_thisPlayer, size);
 	}
 
@@ -25,14 +22,19 @@ public class GoteShiroPlayer extends Strategy {
 
 // check_state配列の表示用
 // 無0　黒1　白2
-// /*
-// 8*8マスの中からランダムに1箇所選んで，
-// その箇所に石を置けるかどうかを
-// currentState.isLegalメソッドでチェック
-// 置けるならそこに置く
-// 置けないなら，置けるところが見つかるまで繰り返す
-// */
-  //       int yoko, tate;
+
+
+
+		Move m = new Move();
+        Negamax n = new Negamax(Search.Phasing.BLACK);
+        System.out.println("＝＝＝＝＝＝＝＝BLACK＝＝＝＝＝＝＝＝");
+        Point p = n.move(check_state,Search.Phasing.BLACK,this.currentTurn);
+        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+        m.x = p.x;
+        m.y = p.y;
+        currentTurn+=2;
+		return m;
+		//   int yoko, tate;
 		// do {
 		// 	yoko = (int)(Math.random()*SIZE);
 		// 	tate = (int)(Math.random()*SIZE);
@@ -40,17 +42,7 @@ public class GoteShiroPlayer extends Strategy {
 
 		// m.x = yoko;
 		// m.y = tate;
-
-		Move m = new Move();
-        Negamax n = new Negamax(Search.Phasing.WHITE);
-        n.limit = 1;
-        System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
-        Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
-        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-        m.x = p.x;
-        m.y = p.y;
-        currentTurn+=2;
-		return m;
+		// return m;
 	}
 
 	private void check(GameState currentState) {
@@ -62,4 +54,5 @@ public class GoteShiroPlayer extends Strategy {
 			}
 		}
 	}
+
 }

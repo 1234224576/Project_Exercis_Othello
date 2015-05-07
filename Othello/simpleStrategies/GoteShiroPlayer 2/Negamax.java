@@ -3,7 +3,6 @@ public class Negamax extends AI {
 	private Evaluter evaluter;
 	private Search search;
 	private Search.Phasing myColor;
-	public int limit = 5;
 
 	public Negamax(Search.Phasing mc){
 		myColor = mc;
@@ -12,7 +11,7 @@ public class Negamax extends AI {
 	@Override
 	public Point move(int[][] board,Search.Phasing ph,int currentTurn){
 
-		int limit = this.limit;
+		int limit = 5;
 		//打てる手を全て生成
 		int[][] movables = search.obtainMovablePosition(board,ph);
 

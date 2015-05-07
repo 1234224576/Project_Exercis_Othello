@@ -43,7 +43,6 @@ public class GoteShiroPlayer extends Strategy {
 
 		Move m = new Move();
         Negamax n = new Negamax(Search.Phasing.WHITE);
-        n.limit = 1;
         System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
         Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
         System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
