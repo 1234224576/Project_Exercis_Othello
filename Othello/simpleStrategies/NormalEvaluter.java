@@ -199,9 +199,9 @@ public class NormalEvaluter extends Evaluter {
     private int obtainMountainEvaluation(){
         int eval = 0;
 
-        for(j=0;j<8;j++){
+        for(int j=0;j<8;j++){
             boolean judge = true;         
-            for(i=0;i<8;i++){
+            for(int i=0;i<8;i++){
             if(board[0][j] != 0){
                 judge = false;
             }
@@ -216,9 +216,9 @@ public class NormalEvaluter extends Evaluter {
             eval += 50;
             }       
         }
-        for(i=0;i<8;i++){
+        for(int i=0;i<8;i++){
             boolean judge = true;
-            for(j=0;j<8;j++){
+            for(int j=0;j<8;j++){
             if(board[i][0] != 0){
                 judge = false;
             }
