@@ -64,7 +64,7 @@ public class Negamax extends AI {
 
 					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh,evaluter);
 					eval = Math.abs(eval);
-					System.out.println("最後の選択:"+eval);
+					// System.out.println("最後の選択:"+eval);
 					if(eval > eval_max){
 						//打つ手を決定
 						resultPos.x = i;
@@ -89,8 +89,8 @@ public class Negamax extends AI {
         }
 
 		if(limit == 0 || search.getIsGameOver(board)){
-			System.out.println("評価値:" + evalute(board,evaluter));
-			System.out.println("手番:" + ph);
+			// System.out.println("評価値:" + evalute(board,evaluter));
+			// System.out.println("手番:" + ph);
 			return evalute(board,evaluter);
 		}
 
@@ -151,7 +151,7 @@ public class Negamax extends AI {
 			}
 		}
 	
-		System.out.println("SELECT" + alpha);
+		// System.out.println("SELECT" + alpha);
 		return alpha;
 	}
 
@@ -161,7 +161,7 @@ public class Negamax extends AI {
 		/*@TODO
 		ここが黒の情報になっているか確かめる必要がある*/
 		// search.plotMovableBoard(movables);
-		System.out.println("MOVABLECOUNT:" + search.getLatestMovableCount());
+		// System.out.println("MOVABLECOUNT:" + search.getLatestMovableCount());
 
 		int myNum;
 		int eneNum;

@@ -48,8 +48,8 @@ public class NormalEvaluter extends Evaluter {
 
 	private int obtainOpenLevelEvalution(){
 		int eval = 0;
-        if(myNum == 1) eval = openLevel * 10;
-        else eval = openLevel*2;
+        eval = -openLevel * 10;
+
 		return eval;
 	}
 
@@ -203,37 +203,56 @@ public class NormalEvaluter extends Evaluter {
             }
         }
 
-		int count = 0; //周りに石があるほど評価が高くなる、石が周りにあまりないときは評価を下げる
+		int count = 0;
 
+        int[][] countPlace = new int[8][8];
         for(int j=0;j<8;j++){
             for(int i=0;i<8;i++){
                 if(changePoint[i][j] != 1) continue;
 
                 int x = i;
                 int y = j;
-        		//辺や角にある時は開放度を加算
-        		if(x == 7) count+=3;
-        		if(x == 0) count+=3;
-        		if(y == 7) count+=3;
-        		if(y == 0) count+=3;
 
-        		if(x < 7 && nextboard[x+1][y] != 0)	count++;
+        		if(x < 7 && countPlace[x+1][y] != 1 && nextboard[x+1][y] == 0){
+                    countPlace[x+1][y] = 1;
+                    count++;
+                }
         		
-        		if(x > 0 && nextboard[x-1][y] != 0)	count++;
+        		if(x > 0 && countPlace[x-1][y] != 1 && nextboard[x-1][y] == 0){
+                    countPlace[x-1][y] = 1;
+                    count++;
+                }
         		
-        		if(y < 7 && nextboard[x][y+1] != 0)	count++;
+        		if(y < 7 && countPlace[x][y+1] != 1 && nextboard[x][y+1] == 0){
+                    countPlace[x][y+1] = 1;
+                    count++;
+                }
         		
-        		if(y > 0 && nextboard[x][y-1] != 0)	count++;
+        		if(y > 0 && countPlace[x][y-1] != 1 && nextboard[x][y-1] == 0){
+                    countPlace[x][y-1] = 1;
+                    count++;
+                }
         		
-        		if(x < 7 && y < 7 && nextboard[x+1][y+1] != 0)	count++;
+        		if(x < 7 && y < 7 && countPlace[x+1][y+1] != 1 && nextboard[x+1][y+1] == 0){
+                    countPlace[x+1][y+1] = 1;
+                    count++;
+                }
         		
-        		if(x < 7 && y > 0 && nextboard[x+1][y-1] != 0)	count++;
-        		
-        		if(x > 0 && y < 7 && nextboard[x-1][y+1] != 0)	count++;
-        		
-        		if(x > 0 && y > 0 && nextboard[x-1][y-1] != 0)	count++;
+        		if(x < 7 && y > 0 && countPlace[x+1][y-1] != 1 && nextboard[x+1][y-1] == 0){
+                    countPlace[x+1][y-1] = 1;
+                    count++;
+        		}
+        		if(x > 0 && y < 7 && countPlace[x-1][y+1] != 1 && nextboard[x-1][y+1] == 0){
+                    countPlace[x-1][y+1] = 1;
+                    count++;
+        		}
+        		if(x > 0 && y > 0 && countPlace[x-1][y-1] != 1 && nextboard[x-1][y-1] == 0){
+                    countPlace[x-1][y-1] = 1;
+                    count++;
+                }
             }
         }
+        System.out.println("count:"+count);
 		this.openLevel = count;
 	}
 }
