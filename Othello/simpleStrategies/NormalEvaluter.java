@@ -1,65 +1,66 @@
 package simpleStrategies;
 public class NormalEvaluter extends Evaluter {
-	private int openLevel; //≥´ ¸≈Ÿ§Ú≥ «º§π§Î
-	private int[][] board = new int[Search.SIZE][Search.SIZE];
-	private int myNum;
-	private int eneNum;
+    private int openLevel; //ÈñãÊîæÂ∫¶„ÇíÊ†ºÁ¥ç„Åô„Çã
+    private int[][] board = new int[Search.SIZE][Search.SIZE];
+    private int myNum;
+    private int eneNum;
 
-	public NormalEvaluter(){
-		
-	}
+    public NormalEvaluter(){
+        
+    }
 
-	public int evalute(int[][] originalBoard,int myNum,int eneNum,int movableCount){
+    public int evalute(int[][] originalBoard,int myNum,int eneNum,int movableCount){
 
-		this.myNum = myNum;
+        this.myNum = myNum;
         this.eneNum = eneNum;
 
-		//æ Û§Ú•ª•√•»
-		for(int j=0;j<Search.SIZE;j++){
+        //ÊÉÖÂ†±„Çí„Çª„ÉÉ„Éà
+        for(int j=0;j<Search.SIZE;j++){
             for(int i=0;i<Search.SIZE;i++){
                 board[i][j] = originalBoard[i][j];
             }
         }
 
-		int eval = 0;
+        int eval = 10000;
 
-		for(int j=0;j<board.length;j++){
-			for(int i=0;i<board.length;i++){
-				if(board[i][j] == this.myNum) eval+=10;
-			}
-		}
+        for(int j=0;j<board.length;j++){
+            for(int i=0;i<board.length;i++){
+                if(board[i][j] == this.myNum) eval+=10;
+            }
+        }
 
-		eval += obtainOpenLevelEvalution();
-		eval += obtainMovableCountEvalution(movableCount);
-		eval += obtainDecidedStoneEvalution();
-		eval += kariEval();
-		return eval;
-	}
+        eval += obtainOpenLevelEvalution();
+        eval += obtainMovableCountEvalution(movableCount);
+        eval += obtainDecidedStoneEvalution();
+        eval -= obtainWingEvalution();
+        eval += kariEval();
+        return eval;
+    }
 
-	private int kariEval(){
-		int eval = 0;
-		if(board[1][1] == myNum) eval -= 1000;
-		if(board[6][1] == myNum) eval -= 1000;
-		if(board[1][6] == myNum) eval -= 1000;
-		if(board[6][6] == myNum) eval -= 1000;
+    private int kariEval(){
+        int eval = 0;
+        if(board[1][1] == myNum) eval -= 1000;
+        if(board[6][1] == myNum) eval -= 1000;
+        if(board[1][6] == myNum) eval -= 1000;
+        if(board[6][6] == myNum) eval -= 1000;
 
-		return eval;
-	}
+        return eval;
+    }
 
-	private int obtainOpenLevelEvalution(){
-		int eval = 0;
+    private int obtainOpenLevelEvalution(){
+        int eval = 0;
         eval =  openLevel * openLevel * (-20);
 
-		return eval;
-	}
+        return eval;
+    }
 
-	private int obtainMovableCountEvalution(int movableCount){
-		int eval = 0;
-		eval =  movableCount * 15;
-		return eval;
-	}
+    private int obtainMovableCountEvalution(int movableCount){
+        int eval = 0;
+        eval =  movableCount * 15;
+        return eval;
+    }
 
-	private int obtainDecidedStoneEvalution(){ // ≥ŒƒÍ¿–
+    private int obtainDecidedStoneEvalution(){ // Á¢∫ÂÆöÁü≥
         int eval = 0;
        
         if(board[0][0] == myNum){
@@ -130,7 +131,6 @@ public class NormalEvaluter extends Evaluter {
         
         return eval;
     }
-<<<<<<< Updated upstream
     
     private int obtainWingEvalution() { // Ëæ∫Ôºà„Ç¶„Ç£„É≥„Ç∞Ôºâ
         int eval = 0;
@@ -176,65 +176,53 @@ public class NormalEvaluter extends Evaluter {
         
         return eval;
     }
-=======
->>>>>>> Stashed changes
 
 
     private int obtainMountainEvaluation(){
-	int eval = 0;
-	
-	for(j=0;j<8;j++){
-	    boolean judge = true;		  
-	    for(i=0;i<8;i++){
-		if(board[0][j] != 0){
-		    judge = false;
-		}
-		if(i != 0 || i != 7 && board[i][j] != myNum ){
-		    judge = false;
-		}
-		if(board[7][j] != 0){
-		    judge = false;
-		}	
-	    }
-	    if(judge = true){
-		eval += 100;
-	    }	    
-	}
-	for(i=0;i<8;i++){
-	    boolean judge = true;
-	    for(j=0;j<8;j++){
-		if(board[i][0] != 0){
-		    judge = false;
-		}
-		if(j != 0 || j != 7 && board[j][i] != myNum){
-		    judge = false;
-		}
-		if(board[i][7] != 0){
-		    judge = false;
-		}
-	    }
-	    if(judge == true){
-		eval += 100;
-	    }
-    }
-    
-    return eval;
-}
+        int eval = 0;
 
-<<<<<<< Updated upstream
-	public void calcOpenLevel(int[][] board,int[][] nextboard,int px,int py){
+        for(j=0;j<8;j++){
+            boolean judge = true;         
+            for(i=0;i<8;i++){
+            if(board[0][j] != 0){
+                judge = false;
+            }
+            if(i != 0 || i != 7 && board[i][j] != myNum ){
+                judge = false;
+            }
+            if(board[7][j] != 0){
+                judge = false;
+            }   
+            }
+            if(judge = true){
+            eval += 100;
+            }       
+        }
+        for(i=0;i<8;i++){
+            boolean judge = true;
+            for(j=0;j<8;j++){
+            if(board[i][0] != 0){
+                judge = false;
+            }
+            if(j != 0 || j != 7 && board[j][i] != myNum){
+                judge = false;
+            }
+            if(board[i][7] != 0){
+                judge = false;
+            }
+            }
+            if(judge == true){
+            eval += 100;
+            }
+        }
+    
+
+        return eval;
+    }
+
+    public void calcOpenLevel(int[][] board,int[][] nextboard,int px,int py){
 
         int[][] changePoint = new int[8][8];
-=======
-	public void calcOpenLevel(int[][] board,int x,int y){
-		int count = 8; //º˛§Í§À¿–§¨§¢§Î§€§……æ≤¡§¨π‚§Ø§ §Î°¢¿–§¨º˛§Í§À§¢§ﬁ§Í§ §§§»§≠§œ…æ≤¡§Ú≤º§≤§Î
-
-		// ’§‰≥—§À§¢§Îª˛§œ≥´ ¸≈Ÿ§Ú≤√ªª
-		if(x == 7) count+=3;
-		if(x == 0) count+=3;
-		if(y == 7) count+=3;
-		if(y == 0) count+=3;
->>>>>>> Stashed changes
 
         for(int j=0;j<8;j++){
             for(int i=0;i<8;i++){
@@ -250,7 +238,7 @@ public class NormalEvaluter extends Evaluter {
             }
         }
 
-		int count = 0;
+        int count = 0;
 
         int[][] countPlace = new int[8][8];
         for(int j=0;j<8;j++){
@@ -260,46 +248,46 @@ public class NormalEvaluter extends Evaluter {
                 int x = i;
                 int y = j;
 
-        		if(x < 7 && countPlace[x+1][y] != 1 && nextboard[x+1][y] == 0){
+                if(x < 7 && countPlace[x+1][y] != 1 && nextboard[x+1][y] == 0){
                     countPlace[x+1][y] = 1;
                     count++;
                 }
-        		
-        		if(x > 0 && countPlace[x-1][y] != 1 && nextboard[x-1][y] == 0){
+                
+                if(x > 0 && countPlace[x-1][y] != 1 && nextboard[x-1][y] == 0){
                     countPlace[x-1][y] = 1;
                     count++;
                 }
-        		
-        		if(y < 7 && countPlace[x][y+1] != 1 && nextboard[x][y+1] == 0){
+                
+                if(y < 7 && countPlace[x][y+1] != 1 && nextboard[x][y+1] == 0){
                     countPlace[x][y+1] = 1;
                     count++;
                 }
-        		
-        		if(y > 0 && countPlace[x][y-1] != 1 && nextboard[x][y-1] == 0){
+                
+                if(y > 0 && countPlace[x][y-1] != 1 && nextboard[x][y-1] == 0){
                     countPlace[x][y-1] = 1;
                     count++;
                 }
-        		
-        		if(x < 7 && y < 7 && countPlace[x+1][y+1] != 1 && nextboard[x+1][y+1] == 0){
+                
+                if(x < 7 && y < 7 && countPlace[x+1][y+1] != 1 && nextboard[x+1][y+1] == 0){
                     countPlace[x+1][y+1] = 1;
                     count++;
                 }
-        		
-        		if(x < 7 && y > 0 && countPlace[x+1][y-1] != 1 && nextboard[x+1][y-1] == 0){
+                
+                if(x < 7 && y > 0 && countPlace[x+1][y-1] != 1 && nextboard[x+1][y-1] == 0){
                     countPlace[x+1][y-1] = 1;
                     count++;
-        		}
-        		if(x > 0 && y < 7 && countPlace[x-1][y+1] != 1 && nextboard[x-1][y+1] == 0){
+                }
+                if(x > 0 && y < 7 && countPlace[x-1][y+1] != 1 && nextboard[x-1][y+1] == 0){
                     countPlace[x-1][y+1] = 1;
                     count++;
-        		}
-        		if(x > 0 && y > 0 && countPlace[x-1][y-1] != 1 && nextboard[x-1][y-1] == 0){
+                }
+                if(x > 0 && y > 0 && countPlace[x-1][y-1] != 1 && nextboard[x-1][y-1] == 0){
                     countPlace[x-1][y-1] = 1;
                     count++;
                 }
             }
         }
         System.out.println("count:"+count);
-		this.openLevel = count;
-	}
+        this.openLevel = count;
+    }
 }
