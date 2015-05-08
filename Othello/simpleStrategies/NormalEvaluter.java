@@ -30,6 +30,7 @@ public class NormalEvaluter extends Evaluter {
         }
 
         eval += obtainOpenLevelEvalution();
+        eval += obtainMountainEvaluation();
         eval += obtainMovableCountEvalution(movableCount);
         eval += obtainDecidedStoneEvalution();
         eval -= obtainWingEvalution();
@@ -195,7 +196,7 @@ public class NormalEvaluter extends Evaluter {
             }   
             }
             if(judge = true){
-            eval += 100;
+            eval += 50;
             }       
         }
         for(i=0;i<8;i++){
@@ -212,7 +213,7 @@ public class NormalEvaluter extends Evaluter {
             }
             }
             if(judge == true){
-            eval += 100;
+            eval += 50;
             }
         }
     
