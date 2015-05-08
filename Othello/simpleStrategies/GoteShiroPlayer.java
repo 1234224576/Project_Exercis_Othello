@@ -33,24 +33,23 @@ public class GoteShiroPlayer extends Strategy {
 // 置けるならそこに置く
 // 置けないなら，置けるところが見つかるまで繰り返す
 // */
-  //       int yoko, tate;
-		// do {
-		// 	yoko = (int)(Math.random()*SIZE);
-		// 	tate = (int)(Math.random()*SIZE);
-		// } while (!currentState.isLegal(thisPlayer,yoko,tate));
-
-		// m.x = yoko;
-		// m.y = tate;
-
 		Move m = new Move();
-        Negamax n = new Negamax(Search.Phasing.WHITE);
-        n.limit = 1;
-        System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
-        Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
-        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-        m.x = p.x;
-        m.y = p.y;
-        currentTurn+=2;
+        int yoko, tate;
+		do {
+			yoko = (int)(Math.random()*SIZE);
+			tate = (int)(Math.random()*SIZE);
+		} while (!currentState.isLegal(thisPlayer,yoko,tate));
+
+		m.x = yoko;
+		m.y = tate;
+  //       Negamax n = new Negamax(Search.Phasing.WHITE);
+  //       n.limit = 1;
+  //       System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
+  //       Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
+  //       System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+  //       m.x = p.x;
+  //       m.y = p.y;
+  //       currentTurn+=2;
 
 		// do{
 		// 	Scanner scan = new Scanner(System.in);
@@ -60,7 +59,7 @@ public class GoteShiroPlayer extends Strategy {
 		// 	m.y = Integer.parseInt(str);
 		// }while(!currentState.isLegal(thisPlayer,m.x,m.y));
 		
-		
+
 
 		return m;
 	}

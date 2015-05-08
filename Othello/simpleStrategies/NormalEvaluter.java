@@ -39,23 +39,24 @@ public class NormalEvaluter extends Evaluter {
 
 	private int kariEval(){
 		int eval = 0;
-		if(board[1][1] == myNum) eval -= 100;
-		if(board[6][1] == myNum) eval -= 100;
-		if(board[1][6] == myNum) eval -= 100;
-		if(board[6][6] == myNum) eval -= 100;
+		if(board[1][1] == myNum) eval -= 1000;
+		if(board[6][1] == myNum) eval -= 1000;
+		if(board[1][6] == myNum) eval -= 1000;
+		if(board[6][6] == myNum) eval -= 1000;
+
 		return eval;
 	}
 
 	private int obtainOpenLevelEvalution(){
 		int eval = 0;
-        eval = -openLevel * 10;
+        eval =  openLevel * openLevel * (-20);
 
 		return eval;
 	}
 
 	private int obtainMovableCountEvalution(int movableCount){
 		int eval = 0;
-		eval =  movableCount * 30;
+		eval =  movableCount * 15;
 		return eval;
 	}
 
@@ -65,14 +66,14 @@ public class NormalEvaluter extends Evaluter {
         if(board[0][0] == myNum){
             for(int i=1;i<Search.SIZE;i++){
                 if(board[i][0] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
             }
             for(int i=1;i<Search.SIZE;i++){
                 if(board[0][i] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
@@ -81,14 +82,14 @@ public class NormalEvaluter extends Evaluter {
         if(board[Search.SIZE-1][0] == myNum){
             for(int i=Search.SIZE-1;i>=0;i--){
                 if(board[i][0] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
             }
             for(int i=1;i<Search.SIZE;i++){
                 if(board[Search.SIZE-1][i] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
@@ -97,14 +98,14 @@ public class NormalEvaluter extends Evaluter {
         if(board[0][Search.SIZE-1] == myNum){
             for(int i=1;i<Search.SIZE;i++){
                 if(board[i][Search.SIZE-1] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
             }
             for(int i=Search.SIZE-1;i>=0;i--){
                 if(board[i][0] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
@@ -114,14 +115,14 @@ public class NormalEvaluter extends Evaluter {
 
             for(int i=Search.SIZE-1;i>=0;i--){
                 if(board[i][Search.SIZE-1] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
             }
             for(int i=Search.SIZE-1;i>=0;i--){
                 if(board[i][Search.SIZE-1] == myNum) {
-                    eval+=100;
+                    eval+=1000;
                 } else {
                     break;
                 }
@@ -171,7 +172,7 @@ public class NormalEvaluter extends Evaluter {
             }
         }
         
-        eval = wingTotal * 10000;
+        eval = wingTotal * (-400);
         
         return eval;
     }
