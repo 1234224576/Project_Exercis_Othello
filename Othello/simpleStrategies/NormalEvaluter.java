@@ -45,6 +45,23 @@ public class NormalEvaluter extends Evaluter {
         if(board[1][6] == myNum) eval -= 1000;
         if(board[6][6] == myNum) eval -= 1000;
 
+        if(board[0][0] != myNum){
+            if(board[0][1] == myNum) eval -= 1000;
+            if(board[1][0] == myNum) eval -= 1000;
+        }
+        if(board[0][7] != myNum){
+            if(board[0][6] == myNum) eval -= 1000;
+            if(board[1][7] == myNum) eval -= 1000;
+        }
+        if(board[7][0] != myNum){
+            if(board[6][0] == myNum) eval -= 1000;
+            if(board[7][1] == myNum) eval -= 1000;
+        }
+        if(board[7][7] != myNum){
+            if(board[7][6] == myNum) eval -= 1000;
+            if(board[6][7] == myNum) eval -= 1000;
+        }
+
         return eval;
     }
 
