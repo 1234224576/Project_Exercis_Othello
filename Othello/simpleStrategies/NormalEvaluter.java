@@ -1,6 +1,6 @@
 package simpleStrategies;
 public class NormalEvaluter extends Evaluter {
-	private int openLevel; //é–‹æ”¾åº¦ã‚’æ ¼ç´ã™ã‚‹
+	private int openLevel; //³«ÊüÅÙ¤ò³ÊÇ¼¤¹¤ë
 	private int[][] board = new int[Search.SIZE][Search.SIZE];
 	private int myNum;
 	private int eneNum;
@@ -14,14 +14,14 @@ public class NormalEvaluter extends Evaluter {
 		this.myNum = myNum;
         this.eneNum = eneNum;
 
-		//æƒ…å ±ã‚’ã‚»ãƒƒãƒˆ
+		//¾ğÊó¤ò¥»¥Ã¥È
 		for(int j=0;j<Search.SIZE;j++){
             for(int i=0;i<Search.SIZE;i++){
                 board[i][j] = originalBoard[i][j];
             }
         }
 
-		int eval = 10000;
+		int eval = 0;
 
 		for(int j=0;j<board.length;j++){
 			for(int i=0;i<board.length;i++){
@@ -32,7 +32,6 @@ public class NormalEvaluter extends Evaluter {
 		eval += obtainOpenLevelEvalution();
 		eval += obtainMovableCountEvalution(movableCount);
 		eval += obtainDecidedStoneEvalution();
-        eval -= obtainWingEvalution();
 		eval += kariEval();
 		return eval;
 	}
@@ -60,7 +59,7 @@ public class NormalEvaluter extends Evaluter {
 		return eval;
 	}
 
-	private int obtainDecidedStoneEvalution(){ // ç¢ºå®šçŸ³
+	private int obtainDecidedStoneEvalution(){ // ³ÎÄêÀĞ
         int eval = 0;
        
         if(board[0][0] == myNum){
@@ -131,6 +130,7 @@ public class NormalEvaluter extends Evaluter {
         
         return eval;
     }
+<<<<<<< Updated upstream
     
     private int obtainWingEvalution() { // è¾ºï¼ˆã‚¦ã‚£ãƒ³ã‚°ï¼‰
         int eval = 0;
@@ -176,19 +176,65 @@ public class NormalEvaluter extends Evaluter {
         
         return eval;
     }
+=======
+>>>>>>> Stashed changes
 
 
-	private int obtainMountainEvaluation(){
-		int eval = 0;
-
-		//ã“ã“ã«å®Ÿè£…ã‚’æ›¸ã
-
-		return eval;
+    private int obtainMountainEvaluation(){
+	int eval = 0;
+	
+	for(j=0;j<8;j++){
+	    boolean judge = true;		  
+	    for(i=0;i<8;i++){
+		if(board[0][j] != 0){
+		    judge = false;
+		}
+		if(i != 0 || i != 7 && board[i][j] != myNum ){
+		    judge = false;
+		}
+		if(board[7][j] != 0){
+		    judge = false;
+		}	
+	    }
+	    if(judge = true){
+		eval += 100;
+	    }	    
 	}
+	for(i=0;i<8;i++){
+	    boolean judge = true;
+	    for(j=0;j<8;j++){
+		if(board[i][0] != 0){
+		    judge = false;
+		}
+		if(j != 0 || j != 7 && board[j][i] != myNum){
+		    judge = false;
+		}
+		if(board[i][7] != 0){
+		    judge = false;
+		}
+	    }
+	    if(judge == true){
+		eval += 100;
+	    }
+    }
+    
+    return eval;
+}
 
+<<<<<<< Updated upstream
 	public void calcOpenLevel(int[][] board,int[][] nextboard,int px,int py){
 
         int[][] changePoint = new int[8][8];
+=======
+	public void calcOpenLevel(int[][] board,int x,int y){
+		int count = 8; //¼ş¤ê¤ËÀĞ¤¬¤¢¤ë¤Û¤ÉÉ¾²Á¤¬¹â¤¯¤Ê¤ë¡¢ÀĞ¤¬¼ş¤ê¤Ë¤¢¤Ş¤ê¤Ê¤¤¤È¤­¤ÏÉ¾²Á¤ò²¼¤²¤ë
+
+		//ÊÕ¤ä³Ñ¤Ë¤¢¤ë»ş¤Ï³«ÊüÅÙ¤ò²Ã»»
+		if(x == 7) count+=3;
+		if(x == 0) count+=3;
+		if(y == 7) count+=3;
+		if(y == 0) count+=3;
+>>>>>>> Stashed changes
 
         for(int j=0;j<8;j++){
             for(int i=0;i<8;i++){
