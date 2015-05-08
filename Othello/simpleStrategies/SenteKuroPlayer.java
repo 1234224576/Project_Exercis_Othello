@@ -27,7 +27,7 @@ public class SenteKuroPlayer extends Strategy {
 
 		Move m = new Move();
         Negamax n = new Negamax(Search.Phasing.BLACK);
-        n.limit = 5;
+        n.limit = 1;
         System.out.println("＝＝＝＝＝＝＝＝BLACK＝＝＝＝＝＝＝＝");
         Point p = n.move(check_state,Search.Phasing.BLACK,this.currentTurn);
         System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");

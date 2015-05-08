@@ -60,7 +60,7 @@ public class GoteShiroPlayer extends Strategy {
 			m.y = Integer.parseInt(str);
 		}while(!currentState.isLegal(thisPlayer,m.x,m.y));
 		
-
+		
 
 		return m;
 	}

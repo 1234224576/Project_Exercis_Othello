@@ -59,7 +59,7 @@ public class Negamax extends AI {
 					}
 
 					NormalEvaluter evaluter = new NormalEvaluter();
-					evaluter.calcOpenLevel(board,i,j); //打つ予定の場所の開放度を計算する
+					evaluter.calcOpenLevel(board,nextBoard,i,j); //打つ予定の場所の開放度を計算する
 
 
 					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh,evaluter);
