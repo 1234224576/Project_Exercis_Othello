@@ -80,6 +80,11 @@ public class NormalEvaluter extends Evaluter {
 
     private int obtainDecidedStoneEvalution(){ // 確定石
         int eval = 0;
+        
+        if(board[0][0] == myNum) eval += 10000;
+        if(board[7][0] == myNum) eval += 10000;
+        if(board[0][7] == myNum) eval += 10000;
+        if(board[7][7] == myNum) eval += 10000;
        
         if(board[0][0] == myNum){
             for(int i=1;i<Search.SIZE;i++){
