@@ -21,7 +21,7 @@ public class NormalEvaluter extends Evaluter {
             }
         }
 
-		int eval = 0;
+		int eval = 10000;
 
 		for(int j=0;j<board.length;j++){
 			for(int i=0;i<board.length;i++){
@@ -32,6 +32,7 @@ public class NormalEvaluter extends Evaluter {
 		eval += obtainOpenLevelEvalution();
 		eval += obtainMovableCountEvalution(movableCount);
 		eval += obtainDecidedStoneEvalution();
+        eval -= obtainWingEvalution();
 		eval += kariEval();
 		return eval;
 	}
@@ -126,6 +127,53 @@ public class NormalEvaluter extends Evaluter {
                 }
             }
         }
+        
+        return eval;
+    }
+    
+    private int obtainWingEvalution() { // 辺（ウィング）
+        int eval = 0;
+        int wing = 0;
+        int wingTotal = 0;
+        
+        for(int i=1;i<Search.SIZE;i++) {
+            wing = 0;
+            if(board[i][0]== 0 && board[i][Search.SIZE-1] == 0){
+                if((board[i][1]== myNum && board[i][Search.SIZE-2] == 0) || (board[i][1]== 0 && board[i][Search.SIZE-2] == myNum)) {
+                    wing = 1;
+                    for(int j=2;j<Search.SIZE-2;j++) {
+                        if(board[i][j] != myNum) {
+                            wing = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(wing == 1) {
+                wingTotal++;
+                System.out.println("wingwingwingwingwingwingwingwingwingwing");
+            }
+        }
+        for(int i=1;i<Search.SIZE;i++) {
+            wing = 0;
+            if(board[0][i]== 0 && board[Search.SIZE-1][i] == 0){
+                if((board[1][i]== myNum && board[Search.SIZE-2][i] == 0) || (board[1][i]== 0 && board[Search.SIZE-2][i] == myNum)) {
+                    wing = 1;
+                    for(int j=2;j<Search.SIZE-2;j++) {
+                        if(board[j][i] != myNum) {
+                            wing = 0;
+                            break;
+                        }
+                    }
+                }
+            }
+            if(wing == 1) {
+                wingTotal++;
+                System.out.println("wingwingwingwingwingwingwingwingwingwing");
+            }
+        }
+        
+        eval = wingTotal * 10000;
         
         return eval;
     }
