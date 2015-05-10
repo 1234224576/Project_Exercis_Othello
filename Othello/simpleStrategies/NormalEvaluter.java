@@ -1,6 +1,7 @@
 package simpleStrategies;
 public class NormalEvaluter extends Evaluter {
     private int openLevel; //開放度を格納する
+    private int cornerLevel; //角についての減点
     private int[][] board = new int[Search.SIZE][Search.SIZE];
     private int myNum;
     private int eneNum;
@@ -21,7 +22,7 @@ public class NormalEvaluter extends Evaluter {
             }
         }
 
-        int eval = 10000;
+        int eval = 100000;
 
         for(int j=0;j<board.length;j++){
             for(int i=0;i<board.length;i++){
@@ -39,30 +40,47 @@ public class NormalEvaluter extends Evaluter {
     }
 
     private int kariEval(){
+        return this.cornerLevel;
+    }
+    public void calcConerLevel(int[][] board,int x,int y,Search.Phasing ph){
+        if(ph == Search.Phasing.BLACK){
+            myNum = 1;
+        }else{
+            myNum = 2;
+        }
+        
         int eval = 0;
-        if(board[1][1] == myNum) eval -= 1000;
-        if(board[6][1] == myNum) eval -= 1000;
-        if(board[1][6] == myNum) eval -= 1000;
-        if(board[6][6] == myNum) eval -= 1000;
+        if(x == 1 && y == 1 && board[0][0] == 0){
+            eval -= 5000;
+        }
+        if(x == 6 && y == 1 && board[7][0] == 0){
+            eval -= 5000;
+        }
+        if(x == 1 && y == 6 && board[0][7] == 0){
+            eval -= 5000;
+        }
+        if(x == 6 && y == 6 && board[7][7] == 0){
+            eval -= 5000;
+        }
 
         if(board[0][0] != myNum){
-            if(board[0][1] == myNum) eval -= 1000;
-            if(board[1][0] == myNum) eval -= 1000;
+            if(x == 0 && y == 1) eval -= 3000;
+            if(x == 1 && y == 0) eval -= 3000;
         }
         if(board[0][7] != myNum){
-            if(board[0][6] == myNum) eval -= 1000;
-            if(board[1][7] == myNum) eval -= 1000;
+            if(x == 0 && y == 6) eval -= 3000;
+            if(x == 1 && y == 7) eval -= 3000;
         }
         if(board[7][0] != myNum){
-            if(board[6][0] == myNum) eval -= 1000;
-            if(board[7][1] == myNum) eval -= 1000;
+            if(x == 6 && y == 0) eval -= 3000;
+            if(x == 7 && y == 1) eval -= 3000;
         }
         if(board[7][7] != myNum){
-            if(board[7][6] == myNum) eval -= 1000;
-            if(board[6][7] == myNum) eval -= 1000;
+            if(x == 7 && y == 6) eval -= 3000;
+            if(x == 6 && y == 7) eval -= 3000;
         }
+        this.cornerLevel = eval;
 
-        return eval;
     }
 
     private int obtainOpenLevelEvalution(){
@@ -80,7 +98,7 @@ public class NormalEvaluter extends Evaluter {
 
     private int obtainDecidedStoneEvalution(){ // 確定石
         int eval = 0;
-        
+
         if(board[0][0] == myNum) eval += 10000;
         if(board[7][0] == myNum) eval += 10000;
         if(board[0][7] == myNum) eval += 10000;
