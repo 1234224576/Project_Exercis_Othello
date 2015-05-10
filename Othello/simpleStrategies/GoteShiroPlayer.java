@@ -34,14 +34,14 @@ public class GoteShiroPlayer extends Strategy {
 // 置けないなら，置けるところが見つかるまで繰り返す
 // */
 		Move m = new Move();
-        int yoko, tate;
-		do {
-			yoko = (int)(Math.random()*SIZE);
-			tate = (int)(Math.random()*SIZE);
-		} while (!currentState.isLegal(thisPlayer,yoko,tate));
+  //       int yoko, tate;
+		// do {
+		// 	yoko = (int)(Math.random()*SIZE);
+		// 	tate = (int)(Math.random()*SIZE);
+		// } while (!currentState.isLegal(thisPlayer,yoko,tate));
 
-		m.x = yoko;
-		m.y = tate;
+		// m.x = yoko;
+		// m.y = tate;
   //       Negamax n = new Negamax(Search.Phasing.WHITE);
   //       n.limit = 1;
   //       System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
@@ -51,13 +51,13 @@ public class GoteShiroPlayer extends Strategy {
   //       m.y = p.y;
   //       currentTurn+=2;
 
-		// do{
-		// 	Scanner scan = new Scanner(System.in);
-		// 	String str = scan.next();
-		// 	m.x = Integer.parseInt(str);
-		// 	str = scan.next();
-		// 	m.y = Integer.parseInt(str);
-		// }while(!currentState.isLegal(thisPlayer,m.x,m.y));
+		do{
+			Scanner scan = new Scanner(System.in);
+			String str = scan.next();
+			m.x = Integer.parseInt(str);
+			str = scan.next();
+			m.y = Integer.parseInt(str);
+		}while(!currentState.isLegal(thisPlayer,m.x,m.y));
 		
 
 

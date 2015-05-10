@@ -51,33 +51,40 @@ public class NormalEvaluter extends Evaluter {
         
         int eval = 0;
         if(x == 1 && y == 1 && board[0][0] == 0){
-            eval -= 5000;
+            System.out.println("WARNING");
+            eval -= 15000;
         }
         if(x == 6 && y == 1 && board[7][0] == 0){
-            eval -= 5000;
+            System.out.println("WARNING");
+
+            eval -= 15000;
         }
         if(x == 1 && y == 6 && board[0][7] == 0){
-            eval -= 5000;
+            System.out.println("WARNING");
+
+            eval -= 15000;
         }
         if(x == 6 && y == 6 && board[7][7] == 0){
-            eval -= 5000;
+            System.out.println("WARNING");
+
+            eval -= 15000;
         }
 
         if(board[0][0] != myNum){
-            if(x == 0 && y == 1) eval -= 3000;
-            if(x == 1 && y == 0) eval -= 3000;
+            if(x == 0 && y == 1) eval -= 10000;
+            if(x == 1 && y == 0) eval -= 10000;
         }
         if(board[0][7] != myNum){
-            if(x == 0 && y == 6) eval -= 3000;
-            if(x == 1 && y == 7) eval -= 3000;
+            if(x == 0 && y == 6) eval -= 10000;
+            if(x == 1 && y == 7) eval -= 10000;
         }
         if(board[7][0] != myNum){
-            if(x == 6 && y == 0) eval -= 3000;
-            if(x == 7 && y == 1) eval -= 3000;
+            if(x == 6 && y == 0) eval -= 10000;
+            if(x == 7 && y == 1) eval -= 10000;
         }
         if(board[7][7] != myNum){
-            if(x == 7 && y == 6) eval -= 3000;
-            if(x == 6 && y == 7) eval -= 3000;
+            if(x == 7 && y == 6) eval -= 10000;
+            if(x == 6 && y == 7) eval -= 10000;
         }
         this.cornerLevel = eval;
 
