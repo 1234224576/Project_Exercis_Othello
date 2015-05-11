@@ -42,22 +42,22 @@ public class GoteShiroPlayer extends Strategy {
 
 		// m.x = yoko;
 		// m.y = tate;
-  //       Negamax n = new Negamax(Search.Phasing.WHITE);
-  //       n.limit = 1;
-  //       System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
-  //       Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
-  //       System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-  //       m.x = p.x;
-  //       m.y = p.y;
-  //       currentTurn+=2;
+        Negamax n = new Negamax(Search.Phasing.WHITE);
+        n.limit = 7;
+        System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
+        Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
+        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
+        m.x = p.x;
+        m.y = p.y;
+        currentTurn+=2;
 
-		do{
-			Scanner scan = new Scanner(System.in);
-			String str = scan.next();
-			m.x = Integer.parseInt(str);
-			str = scan.next();
-			m.y = Integer.parseInt(str);
-		}while(!currentState.isLegal(thisPlayer,m.x,m.y));
+		// do{
+		// 	Scanner scan = new Scanner(System.in);
+		// 	String str = scan.next();
+		// 	m.x = Integer.parseInt(str);
+		// 	str = scan.next();
+		// 	m.y = Integer.parseInt(str);
+		// }while(!currentState.isLegal(thisPlayer,m.x,m.y));
 		
 
 

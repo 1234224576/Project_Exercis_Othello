@@ -14,7 +14,6 @@ public class NormalEvaluter extends Evaluter {
 
         this.myNum = myNum;
         this.eneNum = eneNum;
-
         //情報をセット
         for(int j=0;j<Search.SIZE;j++){
             for(int i=0;i<Search.SIZE;i++){
@@ -48,6 +47,7 @@ public class NormalEvaluter extends Evaluter {
         }else{
             myNum = 2;
         }
+        System.out.println(myNum);
         
         int eval = 0;
         if(x == 1 && y == 1 && board[0][0] == 0){
