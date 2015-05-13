@@ -5,7 +5,6 @@ import game.Move;
 import game.OthelloMoveException;
 import game.Player;
 import game.Strategy;
-import test.*;
 import java.util.*;
 
 public class GoteShiroPlayer extends Strategy {

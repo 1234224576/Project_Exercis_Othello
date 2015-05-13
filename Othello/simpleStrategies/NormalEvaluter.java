@@ -23,11 +23,16 @@ public class NormalEvaluter extends Evaluter {
 
         int eval = 100000;
 
+        int mycount = 0;
         for(int j=0;j<board.length;j++){
             for(int i=0;i<board.length;i++){
-                if(board[i][j] == this.myNum) eval+=10;
+                if(board[i][j] == this.myNum){
+                    mycount++;
+                    eval+=10;
+                }
             }
         }
+
 
         eval += obtainOpenLevelEvalution();
         eval += obtainMountainEvaluation();
@@ -35,6 +40,9 @@ public class NormalEvaluter extends Evaluter {
         eval += obtainDecidedStoneEvalution();
         eval -= obtainWingEvalution();
         eval += kariEval();
+        if(mycount==0){
+            eval = 0;
+        }
         return eval;
     }
 
