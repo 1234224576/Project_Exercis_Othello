@@ -3,7 +3,7 @@ public class Negamax extends AI {
 	private Evaluter evaluter;
 	private Search search;
 	private Search.Phasing myColor;
-	public int limit = 5;
+	public int limit = 7;
 
 	public Negamax(Search.Phasing mc){
 		myColor = mc;
@@ -64,7 +64,6 @@ public class Negamax extends AI {
 
 					eval =  negamax(nextBoard,limit-1,-Integer.MAX_VALUE,Integer.MAX_VALUE,nextPh,evaluter);
 					eval = Math.abs(eval);
-					// System.out.println("最後の選択:"+eval);
 					if(eval > eval_max){
 						//打つ手を決定
 						resultPos.x = i;
@@ -75,7 +74,6 @@ public class Negamax extends AI {
 				}
 			}
 		}
-		System.out.println("最終結果:"+eval_max);
 		return resultPos;
 	}
 
@@ -89,8 +87,6 @@ public class Negamax extends AI {
         }
 
 		if(limit == 0 || search.getIsGameOver(board)){
-			// System.out.println("評価値:" + evalute(board,evaluter));
-			// System.out.println("手番:" + ph);
 			return evalute(board,evaluter);
 		}
 
@@ -105,11 +101,6 @@ public class Negamax extends AI {
 				if(movables[i][j] == 1) movableCount++;
 			}
 		}
-		//打てる場所が一箇所ならすぐ返す
-		// if(movableCount == 1){
-
-		// 	return 0;
-		// }
 		//打てないならパス
 		if(movableCount == 0){
 			Search.Phasing nextPh;
@@ -136,33 +127,22 @@ public class Negamax extends AI {
 						nextPh = Search.Phasing.BLACK;
 					}
 
-					// search.plotBoard(nextBoard,p);
 					eval = -negamax(nextBoard,limit-1,-beta,-alpha,nextPh,evaluter);
-					// System.out.println("SCORE:"+eval);
 
 					alpha = Math.max(alpha,eval);
 
 					if(alpha >= beta){
 						//ベータ値を上回ったら探索を中止
-						// System.out.println("芝刈り：a="+alpha+",b="+beta);
 						return alpha;
 					}
 				}
 			}
 		}
-	
-		// System.out.println("SELECT" + alpha);
 		return alpha;
 	}
 
 	//評価する
 	private int evalute(int[][] board,Evaluter evaluter){
-
-		/*@TODO
-		ここが黒の情報になっているか確かめる必要がある*/
-		// search.plotMovableBoard(movables);
-		// System.out.println("MOVABLECOUNT:" + search.getLatestMovableCount());
-
 		int myNum;
 		int eneNum;
 		if(this.myColor == Search.Phasing.BLACK){

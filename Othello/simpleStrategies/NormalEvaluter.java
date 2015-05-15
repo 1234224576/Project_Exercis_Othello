@@ -55,25 +55,19 @@ public class NormalEvaluter extends Evaluter {
         }else{
             myNum = 2;
         }
-        System.out.println(myNum);
-        
         int eval = 0;
         if(x == 1 && y == 1 && board[0][0] == 0){
-            System.out.println("WARNING");
             eval -= 15000;
         }
         if(x == 6 && y == 1 && board[7][0] == 0){
-            System.out.println("WARNING");
 
             eval -= 15000;
         }
         if(x == 1 && y == 6 && board[0][7] == 0){
-            System.out.println("WARNING");
 
             eval -= 15000;
         }
         if(x == 6 && y == 6 && board[7][7] == 0){
-            System.out.println("WARNING");
 
             eval -= 15000;
         }
@@ -343,7 +337,6 @@ public class NormalEvaluter extends Evaluter {
                 }
             }
         }
-        System.out.println("count:"+count);
         this.openLevel = count;
     }
 }

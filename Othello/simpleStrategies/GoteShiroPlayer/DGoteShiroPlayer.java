@@ -6,6 +6,7 @@ import game.OthelloMoveException;
 import game.Player;
 import game.Strategy;
 
+
 public class GoteShiroPlayer extends Strategy {
 
 	private int[][] check_state = new int[SIZE][SIZE];
@@ -22,32 +23,14 @@ public class GoteShiroPlayer extends Strategy {
 // 8*8マスの石の状態をcheck_state配列に格納
 		check(currentState);
 
-// check_state配列の表示用
-// 無0　黒1　白2
-// /*
-// 8*8マスの中からランダムに1箇所選んで，
-// その箇所に石を置けるかどうかを
-// currentState.isLegalメソッドでチェック
-// 置けるならそこに置く
-// 置けないなら，置けるところが見つかるまで繰り返す
-// */
-  //       int yoko, tate;
-		// do {
-		// 	yoko = (int)(Math.random()*SIZE);
-		// 	tate = (int)(Math.random()*SIZE);
-		// } while (!currentState.isLegal(thisPlayer,yoko,tate));
-
-		// m.x = yoko;
-		// m.y = tate;
-
 		Move m = new Move();
         Negamax n = new Negamax(Search.Phasing.WHITE);
-        System.out.println("＝＝＝＝＝＝＝＝WHITE＝＝＝＝＝＝＝＝");
+        n.limit = 7;
         Point p = n.move(check_state,Search.Phasing.WHITE,this.currentTurn);
-        System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
         m.x = p.x;
         m.y = p.y;
         currentTurn+=2;
+
 		return m;
 	}
 

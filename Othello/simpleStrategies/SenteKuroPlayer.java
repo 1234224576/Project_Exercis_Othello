@@ -5,7 +5,7 @@ import game.Move;
 import game.OthelloMoveException;
 import game.Player;
 import game.Strategy;
-import java.util.*;
+
 public class SenteKuroPlayer extends Strategy {
 	private int[][] check_state = new int[SIZE][SIZE];
 	private int currentTurn = 1;
@@ -19,41 +19,14 @@ public class SenteKuroPlayer extends Strategy {
 
 // 8*8マスの石の状態をcheck_state配列に格納
 		check(currentState);
-
-// check_state配列の表示用
-// 無0　黒1　白2
-
-
-
 		Move m = new Move();
-        // Negamax n = new Negamax(Search.Phasing.BLACK);
-        // n.limit = 5;
-        // System.out.println("＝＝＝＝＝＝＝＝BLACK＝＝＝＝＝＝＝＝");
-        // Point p = n.move(check_state,Search.Phasing.BLACK,this.currentTurn);
-        // System.out.println("＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝");
-        // m.x = p.x;
-        // m.y = p.y;
-        // currentTurn+=2;
-		// return m;
-
-		// 		do{
-		// 	Scanner scan = new Scanner(System.in);
-		// 	String str = scan.next();
-		// 	m.x = Integer.parseInt(str);
-		// 	str = scan.next();
-		// 	m.y = Integer.parseInt(str);
-		// }while(!currentState.isLegal(thisPlayer,m.x,m.y));
-		
-
-		  int yoko, tate;
-		do {
-			yoko = (int)(Math.random()*SIZE);
-			tate = (int)(Math.random()*SIZE);
-		} while (!currentState.isLegal(thisPlayer,yoko,tate));
-
-		m.x = yoko;
-		m.y = tate;
-		 return m;
+        Negamax n = new Negamax(Search.Phasing.BLACK);
+        n.limit = 7;
+        Point p = n.move(check_state,Search.Phasing.BLACK,this.currentTurn);
+        m.x = p.x;
+        m.y = p.y;
+        currentTurn+=2;
+		return m;
 	}
 
 	private void check(GameState currentState) {

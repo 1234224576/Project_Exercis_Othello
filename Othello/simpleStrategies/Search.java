@@ -642,41 +642,4 @@ public class Search {
     public int getLatestMovableCount(){
         return this.latestMovableCount;
     }
-
-    // public static void main(String[] args){
-
-
-    //     int[][] test = {{0,0,0,0,0,0,0,0},
-    //                     {0,0,0,0,0,0,0,0},
-    //                     {0,0,2,2,2,2,1,0},
-    //                     {0,0,1,1,1,0,0,0},
-    //                     {0,0,1,1,1,0,0,0},
-    //                     {0,0,0,0,2,0,0,0},
-    //                     {0,0,0,0,2,0,0,0},
-    //                     {0,0,0,0,0,0,0,0},
-    //                     };
-
-    //     Search app = new Search();
-
-    //     int[][] movable = app.obtainMovablePosition(test,Phasing.BLACK);
-
-    //      app.plotMovableBoard(movable);
-    //     Point p = new Point();
-    //     p.x = 1;
-    //     p.y = 2;
-    //     // for(int i=0;i<SIZE;i++){
-    //     //     for(int j=0;j<SIZE;j++){
-    //     //         if(movable[i][j] == 1){
-    //     //             p.x = i;
-    //     //             p.y = j;
-    //     //         }
-    //     //     }
-    //     // }
-
-    //     int [][] obtainBoard = app.checkNextBoard(test,p,Phasing.BLACK);
-    //     app.plotBoard(obtainBoard,p);
-
-    //     System.out.println("テスト用テスト用テスト用テスト用テスト用テスト用テスト用テスト用テスト用");
-    // }
-
 }
